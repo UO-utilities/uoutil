@@ -147,7 +147,7 @@ namespace uo {
                 if (!text.empty()){
                     text += sep ;
                 }
-                text += flagNameForBit(j);
+                text += flagNameForBit(j+1);
             }
         }
         return text ;
