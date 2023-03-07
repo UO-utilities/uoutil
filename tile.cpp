@@ -15,6 +15,7 @@ namespace uo{
     constexpr auto art_block = (art_info::size * entries_per_block) + 4 ;
     constexpr auto art_offset = 512 * terrain_block ;
     constexpr auto info_string_size = 20 ;
+    constexpr auto tiledata_size = std::size_t(3188736);
     //=========================================================================================
     auto offsetForTerrainTile(tileid_t tileid) ->std::uint64_t {
         auto offset = 0ull ;
@@ -33,7 +34,16 @@ namespace uo{
         return offset ;
     }
     
-    
+    //=========================================================================================
+    auto initTileData(std::ostream output) ->void {
+        auto buffer = std::vector<char>(tiledata_size/1000,0) ;
+        for (auto j=0;j<1000;j++){
+            output.write(buffer.data(),buffer.size());
+        }
+        buffer =std::vector<char>(tiledata_size%1000,0);
+        output.write(buffer.data(),buffer.size());
+        output.seekp(0,std::ios::beg);
+    }
     //=========================================================================================
     // base_info
     //=========================================================================================

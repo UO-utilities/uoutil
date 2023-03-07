@@ -19,6 +19,7 @@ namespace uo{
     auto offsetForTerrainTile(tileid_t tileid) ->std::uint64_t ;
     auto offsetForArtTile(tileid_t tileid) ->std::uint64_t ;
     
+    auto initTileData(std::ostream output) ->void ;
     
     struct base_info {
     protected:

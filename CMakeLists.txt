@@ -11,7 +11,6 @@
 cmake_minimum_required(VERSION 3.24)
 project(uoutil VERSION 1.0 LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_C_STANDARD 11)
 option(WITH_ZLIB "Build internal zlib" OFF)
 
 
@@ -22,20 +21,22 @@ option(WITH_ZLIB "Build internal zlib" OFF)
 if (${WITH_ZLIB} OR WIN32)
 add_library(uoutil STATIC
 
-    ${PROJECT_SOURCE_DIR}/flag.cpp
     ${PROJECT_SOURCE_DIR}/general.cpp
-    ${PROJECT_SOURCE_DIR}/hash.cpp
-    ${PROJECT_SOURCE_DIR}c/idx.cpp
-    ${PROJECT_SOURCE_DIR}/tile.cpp
-    ${PROJECT_SOURCE_DIR}/uop.cpp
-
-    ${PROJECT_SOURCE_DIR}/flag.hpp
     ${PROJECT_SOURCE_DIR}/general.hpp
+    ${PROJECT_SOURCE_DIR}/hash.cpp
     ${PROJECT_SOURCE_DIR}/hash.hpp
-    ${PROJECT_SOURCE_DIR}/idx.hpp
-    ${PROJECT_SOURCE_DIR}/tile.hpp
+    ${PROJECT_SOURCE_DIR}/uop.cpp
     ${PROJECT_SOURCE_DIR}/uop.hpp
-
+    ${PROJECT_SOURCE_DIR}/idx.cpp
+    ${PROJECT_SOURCE_DIR}/idx.hpp
+    ${PROJECT_SOURCE_DIR}/flag.cpp
+    ${PROJECT_SOURCE_DIR}/flag.hpp
+    ${PROJECT_SOURCE_DIR}/tile.cpp
+    ${PROJECT_SOURCE_DIR}/tile.hpp
+    ${PROJECT_SOURCE_DIR}/color.cpp
+    ${PROJECT_SOURCE_DIR}/color.hpp
+    ${PROJECT_SOURCE_DIR}/image.cpp
+    ${PROJECT_SOURCE_DIR}/image.hpp
 
     ${PROJECT_SOURCE_DIR}/zlib/adler32.c
     ${PROJECT_SOURCE_DIR}/zlib/compress.c
@@ -65,19 +66,22 @@ add_library(uoutil STATIC
 )
 else()
 add_library(uoutil STATIC
-    ${PROJECT_SOURCE_DIR}/flag.cpp
     ${PROJECT_SOURCE_DIR}/general.cpp
-    ${PROJECT_SOURCE_DIR}/hash.cpp
-    ${PROJECT_SOURCE_DIR}/idx.cpp
-    ${PROJECT_SOURCE_DIR}/tile.cpp
-    ${PROJECT_SOURCE_DIR}/uop.cpp
-
-    ${PROJECT_SOURCE_DIR}/flag.hpp
     ${PROJECT_SOURCE_DIR}/general.hpp
+    ${PROJECT_SOURCE_DIR}/hash.cpp
     ${PROJECT_SOURCE_DIR}/hash.hpp
-    ${PROJECT_SOURCE_DIR}/idx.hpp
-    ${PROJECT_SOURCE_DIR}/tile.hpp
+    ${PROJECT_SOURCE_DIR}/uop.cpp
     ${PROJECT_SOURCE_DIR}/uop.hpp
+    ${PROJECT_SOURCE_DIR}/idx.cpp
+    ${PROJECT_SOURCE_DIR}/idx.hpp
+    ${PROJECT_SOURCE_DIR}/flag.cpp
+    ${PROJECT_SOURCE_DIR}/flag.hpp
+    ${PROJECT_SOURCE_DIR}/tile.cpp
+    ${PROJECT_SOURCE_DIR}/tile.hpp
+    ${PROJECT_SOURCE_DIR}/color.cpp
+    ${PROJECT_SOURCE_DIR}/color.hpp
+    ${PROJECT_SOURCE_DIR}/image.cpp
+    ${PROJECT_SOURCE_DIR}/image.hpp
 )
  
  
@@ -100,10 +104,12 @@ else()
         if (APPLE)
                 target_compile_options( uoutil PRIVATE
                         $<$<CONFIG:Release>:-Os>
+                        -Wno-implicit-function-declaration
                 )
         else()
                 target_compile_options(uoutil PRIVATE
                         $<$<CONFIG:Release>:-O2>
+                        -Wno-implicit-function-declaration
                 )
         endif()
 endif(WIN32)

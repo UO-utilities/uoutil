@@ -11,6 +11,10 @@
 		564EE4AE29B506A600D7480F /* flag.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 564EE4AC29B506A600D7480F /* flag.hpp */; };
 		564EE4B129B6028C00D7480F /* tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 564EE4AF29B6028C00D7480F /* tile.cpp */; };
 		564EE4B229B6028C00D7480F /* tile.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 564EE4B029B6028C00D7480F /* tile.hpp */; };
+		56706DDF29B6C86B00B72E40 /* color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56706DDD29B6C86B00B72E40 /* color.cpp */; };
+		56706DE029B6C86B00B72E40 /* color.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 56706DDE29B6C86B00B72E40 /* color.hpp */; };
+		56706DE329B6CFBF00B72E40 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56706DE129B6CFBF00B72E40 /* image.cpp */; };
+		56706DE429B6CFBF00B72E40 /* image.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 56706DE229B6CFBF00B72E40 /* image.hpp */; };
 		568AFFE529B24B7500A8A0C8 /* general.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 568AFFE329B24B7500A8A0C8 /* general.cpp */; };
 		568AFFE629B24B7500A8A0C8 /* general.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 568AFFE429B24B7500A8A0C8 /* general.hpp */; };
 		568AFFE929B26A9D00A8A0C8 /* hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 568AFFE729B26A9D00A8A0C8 /* hash.cpp */; };
@@ -27,6 +31,10 @@
 		564EE4AF29B6028C00D7480F /* tile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tile.cpp; sourceTree = "<group>"; };
 		564EE4B029B6028C00D7480F /* tile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tile.hpp; sourceTree = "<group>"; };
 		564EE4B329B64E0F00D7480F /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		56706DDD29B6C86B00B72E40 /* color.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
+		56706DDE29B6C86B00B72E40 /* color.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = color.hpp; sourceTree = "<group>"; };
+		56706DE129B6CFBF00B72E40 /* image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
+		56706DE229B6CFBF00B72E40 /* image.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = image.hpp; sourceTree = "<group>"; };
 		568AFFDA29B247D800A8A0C8 /* libuoutil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuoutil.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		568AFFE329B24B7500A8A0C8 /* general.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = general.cpp; sourceTree = "<group>"; };
 		568AFFE429B24B7500A8A0C8 /* general.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = general.hpp; sourceTree = "<group>"; };
@@ -53,18 +61,22 @@
 			isa = PBXGroup;
 			children = (
 				564EE4B329B64E0F00D7480F /* CMakeLists.txt */,
-				568AFFE429B24B7500A8A0C8 /* general.hpp */,
-				568AFFE829B26A9D00A8A0C8 /* hash.hpp */,
-				568AFFEC29B26DB300A8A0C8 /* uop.hpp */,
-				568AFFF029B4CFAD00A8A0C8 /* idx.hpp */,
-				564EE4AC29B506A600D7480F /* flag.hpp */,
-				564EE4B029B6028C00D7480F /* tile.hpp */,
 				568AFFE329B24B7500A8A0C8 /* general.cpp */,
+				568AFFE429B24B7500A8A0C8 /* general.hpp */,
 				568AFFE729B26A9D00A8A0C8 /* hash.cpp */,
+				568AFFE829B26A9D00A8A0C8 /* hash.hpp */,
 				568AFFEB29B26DB300A8A0C8 /* uop.cpp */,
+				568AFFEC29B26DB300A8A0C8 /* uop.hpp */,
 				568AFFEF29B4CFAD00A8A0C8 /* idx.cpp */,
+				568AFFF029B4CFAD00A8A0C8 /* idx.hpp */,
 				564EE4AB29B506A600D7480F /* flag.cpp */,
+				564EE4AC29B506A600D7480F /* flag.hpp */,
 				564EE4AF29B6028C00D7480F /* tile.cpp */,
+				564EE4B029B6028C00D7480F /* tile.hpp */,
+				56706DDD29B6C86B00B72E40 /* color.cpp */,
+				56706DDE29B6C86B00B72E40 /* color.hpp */,
+				56706DE129B6CFBF00B72E40 /* image.cpp */,
+				56706DE229B6CFBF00B72E40 /* image.hpp */,
 				568AFFDB29B247D800A8A0C8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,6 +98,8 @@
 			files = (
 				564EE4B229B6028C00D7480F /* tile.hpp in Headers */,
 				568AFFEE29B26DB300A8A0C8 /* uop.hpp in Headers */,
+				56706DE429B6CFBF00B72E40 /* image.hpp in Headers */,
+				56706DE029B6C86B00B72E40 /* color.hpp in Headers */,
 				568AFFEA29B26A9D00A8A0C8 /* hash.hpp in Headers */,
 				568AFFF229B4CFAD00A8A0C8 /* idx.hpp in Headers */,
 				564EE4AE29B506A600D7480F /* flag.hpp in Headers */,
@@ -155,6 +169,8 @@
 				568AFFF129B4CFAD00A8A0C8 /* idx.cpp in Sources */,
 				568AFFE529B24B7500A8A0C8 /* general.cpp in Sources */,
 				564EE4AD29B506A600D7480F /* flag.cpp in Sources */,
+				56706DDF29B6C86B00B72E40 /* color.cpp in Sources */,
+				56706DE329B6CFBF00B72E40 /* image.cpp in Sources */,
 				568AFFE929B26A9D00A8A0C8 /* hash.cpp in Sources */,
 				564EE4B129B6028C00D7480F /* tile.cpp in Sources */,
 			);
