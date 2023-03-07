@@ -147,8 +147,8 @@ namespace uo{
         output <<"\tunknown3        = "<<static_cast<std::uint16_t>(unknown3)<<"\n";
         output <<"\thue             = "<<static_cast<std::uint16_t>(hue)<<"\n";
         output <<"\tstacking_offset = "<<stacking_offset<<"\n";
-        output<<"\theight           = "<<static_cast<std::uint16_t>(height)<<"\n";
-        output<<"\tflag             = "<<flag.description() << std::endl;
+        output <<"\theight          = "<<static_cast<std::uint16_t>(height)<<"\n";
+        output <<"\tflag            = "<<flag.description() << std::endl;
 
     }
     //=========================================================================================
