@@ -13,14 +13,6 @@
 //=========================================================================================
 namespace uo{
     
-
-    
-    
-    auto offsetForTerrainTile(tileid_t tileid) ->std::uint64_t ;
-    auto offsetForArtTile(tileid_t tileid) ->std::uint64_t ;
-    
-    auto initTileData(std::ostream output) ->void ;
-    
     struct base_info {
     protected:
         auto loadName(std::istream &input) ->void ;
@@ -45,6 +37,9 @@ namespace uo{
         std::uint16_t texture_id ;
         ~terrain_info()=default ;
         terrain_info() ;
+        terrain_info(const std::uint8_t *ptr);
+        terrain_info(std::istream &input) ;
+        
         auto load(const std::uint8_t * ptr) ->void final ;
         auto load(std::istream &input) ->void final;
         auto save(std::uint8_t * ptr) const ->void final;
@@ -64,12 +59,26 @@ namespace uo{
         std::uint16_t stacking_offset ;
         std::uint8_t height ;
         art_info() ;
+        art_info(const std::uint8_t * ptr) ;
+        art_info(std::istream &input) ;
         auto load(const std::uint8_t * ptr) ->void final ;
         auto load(std::istream &input) ->void final;
         auto save(std::uint8_t * ptr) const ->void final;
         auto save(std::ostream &output) const ->void final;
 
     };
+    
+    auto offsetForTerrainTile(tileid_t tileid) ->std::uint64_t ;
+    auto offsetForArtTile(tileid_t tileid) ->std::uint64_t ;
+    
+    auto initTileData(std::ostream &output) ->void ;
+ 
+    auto terrainTiles(std::istream &input) ->std::vector<terrain_info> ;
+    auto artTiles(std::istream &input) ->std::vector<art_info> ;
+    
+    auto saveTerrain(std::ostream &output,const std::vector<terrain_info> &data )->void ;
+    auto saveArt(std::ostream &output,const std::vector<art_info> &data )->void ;
+
 }
 
 

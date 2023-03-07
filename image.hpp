@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <filesystem>
 
 #include "color.hpp"
 //=========================================================================================
@@ -29,6 +30,10 @@ namespace uo {
         auto flip() ->image_t& ;
         auto invert() ->image_t &;
         auto hue(bool partial , const std::vector<color_t> &colors) const -> image_t ;
+        auto hue(bool partial , const std::uint8_t *colors) const -> image_t ;
     };
+    
+    auto loadBMP(const std::filesystem::path &path) ->image_t ;
+    auto saveBMP(const image_t &image, const std::filesystem::path &path) ->bool ;
 }
 #endif /* image_hpp */

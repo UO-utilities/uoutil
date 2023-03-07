@@ -101,15 +101,17 @@ if (WIN32)
         )
         
 else()
+    target_compile_options( uoutil PRIVATE
+        -Wno-implicit-function-declaration
+    )
+
         if (APPLE)
                 target_compile_options( uoutil PRIVATE
                         $<$<CONFIG:Release>:-Os>
-                        -Wno-implicit-function-declaration
                 )
         else()
                 target_compile_options(uoutil PRIVATE
                         $<$<CONFIG:Release>:-O2>
-                        -Wno-implicit-function-declaration
                 )
         endif()
 endif(WIN32)

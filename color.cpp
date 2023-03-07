@@ -40,6 +40,9 @@ namespace uo{
             auto temp = (((color>>(j*shift)) & mask) * factor) ;
             converted |= (static_cast<std::uint16_t>((temp<0.9?0:std::round(temp)))<<(cshift*j));
          }
+        if (!static_cast<bool>((color>>24) &0xFF) ){
+            converted = 0 ;
+        }
         return converted ;
 
     }
@@ -68,6 +71,15 @@ namespace uo{
         auto rvalue = color_t(value) ;
         if (((partial && grey()) || (!partial)) && !transparent()){
             rvalue = colors.at(this->red());
+        }
+        return rvalue ;
+    }
+    //=========================================================================================
+    auto color_t::hue(bool partial,const std::uint8_t *colors) const ->color_t {
+        auto ptr = reinterpret_cast<const std::uint16_t*>(colors);
+        auto rvalue = color_t(value) ;
+        if (((partial && grey()) || (!partial)) && !transparent()){
+            rvalue = *(ptr+this->red());
         }
         return rvalue ;
     }

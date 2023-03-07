@@ -17,34 +17,6 @@ namespace uo{
     constexpr auto info_string_size = 20 ;
     constexpr auto tiledata_size = std::size_t(3188736);
     //=========================================================================================
-    auto offsetForTerrainTile(tileid_t tileid) ->std::uint64_t {
-        auto offset = 0ull ;
-        if (tileid == 0){
-            return offset;
-        }
-        offset = ((tileid/entries_per_block) * terrain_block);
-        offset += (((tileid % entries_per_block) * terrain_info::size) + 4) ;
-        return offset ;
-    }
-    //=========================================================================================
-    auto offsetForArtTile(tileid_t tileid) ->std::uint64_t {
-        auto offset = art_offset ;
-        offset += ((tileid/entries_per_block) * art_block) ;
-        offset+= (((tileid%entries_per_block) * art_info::size)+4) ;
-        return offset ;
-    }
-    
-    //=========================================================================================
-    auto initTileData(std::ostream output) ->void {
-        auto buffer = std::vector<char>(tiledata_size/1000,0) ;
-        for (auto j=0;j<1000;j++){
-            output.write(buffer.data(),buffer.size());
-        }
-        buffer =std::vector<char>(tiledata_size%1000,0);
-        output.write(buffer.data(),buffer.size());
-        output.seekp(0,std::ios::beg);
-    }
-    //=========================================================================================
     // base_info
     //=========================================================================================
     //=========================================================================================
@@ -90,6 +62,15 @@ namespace uo{
         tiletype = tiletype_t::terrain;
     }
     //=========================================================================================
+    terrain_info::terrain_info(const std::uint8_t *ptr):terrain_info() {
+        this->load(ptr);
+    }
+    //=========================================================================================
+    terrain_info::terrain_info(std::istream &input) {
+        this->load(input);
+    }
+
+    //=========================================================================================
     auto terrain_info::load(const std::uint8_t * ptr) ->void {
         std::copy(ptr,ptr+8,reinterpret_cast<std::uint8_t*>(&flag.value));
         std::copy(ptr+8,ptr+10,reinterpret_cast<std::uint8_t*>(&texture_id));
@@ -120,6 +101,15 @@ namespace uo{
     art_info::art_info(): weight(0),quality(0),misc_data(0),unknown2(),quantity(0),animid(0),unknown3(0),hue(0),stacking_offset(),height(0){
         tiletype = tiletype_t::art;
     }
+    //=========================================================================================
+    art_info::art_info(const std::uint8_t * ptr) :art_info(){
+        this->load(ptr);
+    }
+    //=========================================================================================
+    art_info::art_info(std::istream &input) :art_info(){
+        this->load(input);
+    }
+
     //=========================================================================================
     auto art_info::load(const std::uint8_t * ptr) ->void {
         std::copy(ptr,ptr+8,reinterpret_cast<std::uint8_t*>(&flag.value));
@@ -189,6 +179,92 @@ namespace uo{
         output.write(reinterpret_cast<const char*>(&stacking_offset),sizeof(stacking_offset));
         output.write(reinterpret_cast<const char*>(&height),sizeof(height));
         saveName(output) ;
+    }
+
+    //=========================================================================================
+    // support routines
+    //=========================================================================================
+    //=========================================================================================
+    auto offsetForTerrainTile(tileid_t tileid) ->std::uint64_t {
+        auto offset = 0ull ;
+        if (tileid == 0){
+            return offset;
+        }
+        offset = ((tileid/entries_per_block) * terrain_block);
+        offset += (((tileid % entries_per_block) * terrain_info::size) + 4) ;
+        return offset ;
+    }
+    //=========================================================================================
+    auto offsetForArtTile(tileid_t tileid) ->std::uint64_t {
+        auto offset = art_offset ;
+        offset += ((tileid/entries_per_block) * art_block) ;
+        offset+= (((tileid%entries_per_block) * art_info::size)+4) ;
+        return offset ;
+    }
+    
+    //=========================================================================================
+    auto initTileData(std::ostream &output) ->void {
+        auto buffer = std::vector<char>(tiledata_size/1000,0) ;
+        for (auto j=0;j<1000;j++){
+            output.write(buffer.data(),buffer.size());
+        }
+        buffer =std::vector<char>(tiledata_size%1000,0);
+        output.write(buffer.data(),buffer.size());
+        output.seekp(0,std::ios::beg);
+    }
+    //=========================================================================================
+    auto terrainTiles(std::istream &input) ->std::vector<terrain_info> {
+        auto rvalue = std::vector<terrain_info>() ;
+        input.seekg(0,std::ios::beg);
+        for (tileid_t tileid = 0 ; tileid < terrain_tile_max;tileid++){
+            if ((tileid == 1) || ((tileid!=0) && ((tileid%entries_per_block)==0))){
+                input.seekg(4,std::ios::cur);
+            }
+            rvalue.push_back(terrain_info(input));
+            if (!input.good()){
+                throw std::runtime_error("Error reading terrain_info");
+            }
+        }
+        return rvalue ;
+    }
+    //=========================================================================================
+    auto artTiles(std::istream &input) ->std::vector<art_info> {
+        auto rvalue = std::vector<art_info>();
+        input.seekg(((entries_per_block*terrain_info::size)+4)*(terrain_tile_max/entries_per_block),std::ios::beg) ;
+        for (tileid_t tileid = 0 ; tileid< invalid_tile; tileid++){
+            if (tileid%entries_per_block == 0){
+                input.seekg(4,std::ios::cur);
+            }
+            rvalue.push_back(art_info(input));
+        }
+        return rvalue ;
+    }
+    
+    //=========================================================================================
+    auto saveTerrain(std::ostream &output,const std::vector<terrain_info> &data )->void {
+        output.seekp(0,std::ios::beg);
+        tileid_t tileid=0 ;
+        auto header = std::uint32_t(0);
+        for (const auto &entry:data){
+            if ((tileid==1) || ((tileid!=0) && ((tileid%entries_per_block)==0))){
+                output.write(reinterpret_cast<char*>(&header),sizeof(header));
+            }
+            entry.save(output);
+        }
+        
+    }
+    //=========================================================================================
+    auto saveArt(std::ostream &output,const std::vector<art_info> &data )->void {
+        output.seekp(((entries_per_block*terrain_info::size)+4)*(terrain_tile_max/entries_per_block),std::ios::beg);
+        tileid_t tileid=0 ;
+        auto header = std::uint32_t(0);
+        for (const auto &entry:data){
+            if ((tileid%entries_per_block)==0){
+                output.write(reinterpret_cast<char*>(&header),sizeof(header));
+            }
+            entry.save(output);
+        }
+
     }
 
 }
