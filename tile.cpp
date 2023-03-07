@@ -58,6 +58,11 @@ namespace uo{
     // terrain_info
     //=========================================================================================
     //=========================================================================================
+    auto terrain_info::header(std::ostream &output,const std::string &sep,const std::string &flagsep) ->void{
+        output<<"name"<<sep<<"texid"<<sep;
+        flag_t::header(output,flagsep);
+    }
+    //=========================================================================================
     terrain_info::terrain_info():texture_id(0xFFFF) {
         tiletype = tiletype_t::terrain;
     }
@@ -69,7 +74,17 @@ namespace uo{
     terrain_info::terrain_info(std::istream &input) {
         this->load(input);
     }
-
+    //=========================================================================================
+    auto terrain_info::column(std::ostream &output,const std::string &sep, const std::string &flagsep) const ->void {
+        output<<name<<sep<<texture_id<<sep;
+        flag.column(output,flagsep);
+    }
+    //=========================================================================================
+    auto terrain_info::description(std::ostream &output) const ->void {
+        output <<"\tname  = "<<name<<"\n";
+        output <<"\ttexid = "<<texture_id<<"\n";
+        output <<"\tflag  = "<<flag.description()<<std::endl;
+    }
     //=========================================================================================
     auto terrain_info::load(const std::uint8_t * ptr) ->void {
         std::copy(ptr,ptr+8,reinterpret_cast<std::uint8_t*>(&flag.value));
@@ -98,6 +113,11 @@ namespace uo{
     // art_info
     //=========================================================================================
     //=========================================================================================
+    auto art_info::header(std::ostream &output,const std::string &sep,const std::string &flagsep) ->void{
+        output<<"name"<<sep<<"weight"<<sep<<"quality"<<sep<<"misc_data"<<sep<<"unknown2"<<sep<<"quantity"<<sep<<"animid"<<sep<<"unknown3"<<sep<<"hue"<<sep<<"stacking_offset"<<sep<<"height"<<sep;
+        flag_t::header(output,flagsep);
+    }
+    //=========================================================================================
     art_info::art_info(): weight(0),quality(0),misc_data(0),unknown2(),quantity(0),animid(0),unknown3(0),hue(0),stacking_offset(),height(0){
         tiletype = tiletype_t::art;
     }
@@ -110,6 +130,27 @@ namespace uo{
         this->load(input);
     }
 
+    //=========================================================================================
+    auto art_info::column(std::ostream &output,const std::string &sep, const std::string &flagsep) const->void {
+        output<<name<<sep<<static_cast<std::uint16_t>(weight)<<sep<<static_cast<std::uint16_t>(quality)<<sep<<misc_data<<sep<<static_cast<std::uint16_t>(unknown2)<<sep<<static_cast<std::uint16_t>(quantity)<<sep<<animid<<sep<<static_cast<std::uint16_t>(unknown3)<<sep<<static_cast<std::uint16_t>(hue)<<sep<<stacking_offset<<sep<<static_cast<std::uint16_t>(height)<<sep;
+        flag.column(output,flagsep);
+    }
+    //=========================================================================================
+    auto art_info::description(std::ostream &output) const ->void {
+        output <<"\tname            = "<<name<<"\n";
+        output <<"\tweight          = "<<static_cast<std::uint16_t>(weight)<<"\n";
+        output <<"\tquality         = "<<static_cast<std::uint16_t>(quality)<<"\n";
+        output <<"\tmisc_data       = "<<misc_data<<"\n";
+        output <<"\tunknown2        = "<<static_cast<std::uint16_t>(unknown2)<<"\n";
+        output <<"\tquantity        = "<<static_cast<std::uint16_t>(quantity)<<"\n";
+        output <<"\tanimid          = "<<animid<<"\n";
+        output <<"\tunknown3        = "<<static_cast<std::uint16_t>(unknown3)<<"\n";
+        output <<"\thue             = "<<static_cast<std::uint16_t>(hue)<<"\n";
+        output <<"\tstacking_offset = "<<stacking_offset<<"\n";
+        output<<"\theight           = "<<static_cast<std::uint16_t>(height)<<"\n";
+        output<<"\tflag             = "<<flag.description() << std::endl;
+
+    }
     //=========================================================================================
     auto art_info::load(const std::uint8_t * ptr) ->void {
         std::copy(ptr,ptr+8,reinterpret_cast<std::uint8_t*>(&flag.value));

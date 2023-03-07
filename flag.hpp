@@ -6,6 +6,7 @@
 #include <cstdint>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 //=========================================================================================
 namespace uo {
@@ -93,14 +94,18 @@ namespace uo {
         static const std::unordered_map<std::string,std::uint64_t> flagname_masks ;
         static auto maskForName(const std::string &flag_name) ->std::uint64_t ;
         static auto flagNameForBit(int bit) ->const std::string& ;
-        
+        static auto header(std::ostream &output , const std::string &sep=",")  ->void ;
+
         std::uint64_t value ;
         
         flag_t(std::uint64_t flag_value=0) ;
         flag_t(const std::string &value,const std::string &sep=":") ;
+        flag_t(const std::vector<std::string> &values);
+        
         auto hasFlag(std::uint64_t mask) const -> bool ;
         [[maybe_unused]] auto setFlag(std::uint64_t mask) ->flag_t& ;
         auto description(const std::string &sep=":") const ->std::string ;
+        auto column(std::ostream &output , const std::string &sep=",") const ->void ;
         [[maybe_unused]] auto operator=(std::uint64_t value) ->flag_t& ;
         [[maybe_unused]] auto operator=(std::int64_t value) ->flag_t& ;
         [[maybe_unused]] auto operator=(std::uint32_t value) ->flag_t& ;
