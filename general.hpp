@@ -35,6 +35,39 @@ namespace uo {
     using tileid_t = std::uint16_t ;
     constexpr auto invalid_tile = tileid_t(0xFFFF) ;
     constexpr auto terrain_tile_max = tileid_t(0x4000) ;
-    
+
+    //==========================================================
+    // The source for this was found on StackOverflow at:
+    // https://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
+    // It was slightly modified for a tad of error checking.
+    template <typename... Args>
+    std::string format(const std::string &format_str, Args... args) {
+        auto rvalue = std::string();
+        if (!format_str.empty()) {
+
+            // First see how much space we need?
+            auto size_s = std::snprintf(nullptr, 0, format_str.c_str(), args...);
+            if (size_s < 0) {
+                throw std::runtime_error("Error applying format string");
+            }
+            if (size_s > 0) {
+                // Take the space we need and add 1 for the terminating \0
+                size_s += 1;
+                auto size = static_cast<std::size_t>(size_s);
+                // Lets create a buffer we need for the data
+                auto buf = std::make_unique<char[]>(size);
+                size_s =
+                std::snprintf(buf.get(), size, format_str.c_str(), args...);
+                if (size_s < 0) {
+                    throw std::runtime_error("Error applying format string");
+                }
+                if (size_s > 0) {
+                    rvalue = std::string(buf.get(), buf.get() + size_s);
+                }
+            }
+         }
+        return rvalue;
+    }
+
 }
 #endif /* general_hpp */

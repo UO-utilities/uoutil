@@ -37,6 +37,8 @@ add_library(uoutil STATIC
     ${PROJECT_SOURCE_DIR}/color.hpp
     ${PROJECT_SOURCE_DIR}/image.cpp
     ${PROJECT_SOURCE_DIR}/image.hpp
+    ${PROJECT_SOURCE_DIR}/art.cpp
+    ${PROJECT_SOURCE_DIR}/art.hpp
 
     ${PROJECT_SOURCE_DIR}/zlib/adler32.c
     ${PROJECT_SOURCE_DIR}/zlib/compress.c
@@ -82,6 +84,8 @@ add_library(uoutil STATIC
     ${PROJECT_SOURCE_DIR}/color.hpp
     ${PROJECT_SOURCE_DIR}/image.cpp
     ${PROJECT_SOURCE_DIR}/image.hpp
+    ${PROJECT_SOURCE_DIR}/art.cpp
+    ${PROJECT_SOURCE_DIR}/art.hpp
 )
  
  

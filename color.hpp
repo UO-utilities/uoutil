@@ -27,6 +27,7 @@ namespace uo{
 
         auto operator=(std::uint16_t color) ->color_t& ;
         auto operator=(std::uint32_t color) ->color_t& ;
+        auto operator<(const color_t &color) const ->bool ;
     };
     
 }

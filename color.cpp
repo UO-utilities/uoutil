@@ -94,5 +94,9 @@ namespace uo{
         value = convert(color);
         return *this;
     }
+    //=========================================================================================
+    auto color_t::operator<(const color_t &color) const ->bool {
+        return value < color.value ;
+    }
 
 }

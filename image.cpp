@@ -17,8 +17,6 @@ namespace uo {
     image_t::image_t(std::size_t height, std::size_t width,const color_t &fill) :image_t(){
         data = std::vector<std::vector<color_t>>(height,std::vector<color_t>(width,fill));
     }
-    //=========================================================================================
-    image_t::image_t(std::uint32_t height, std::uint32_t width,const color_t &fill):image_t(static_cast<std::size_t>(height),static_cast<std::size_t>(width),fill){}
     
     //=========================================================================================
     auto image_t::empty() const ->bool {

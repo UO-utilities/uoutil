@@ -18,7 +18,6 @@ namespace uo {
     public:
         image_t() = default ;
         image_t(std::size_t height, std::size_t width,const color_t &fill = color_t()) ;
-        image_t(std::uint32_t height, std::uint32_t width,const color_t &fill = color_t());
         auto empty() const ->bool ;
         
         auto size() const ->std::pair<std::size_t,std::size_t>;
