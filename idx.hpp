@@ -8,6 +8,8 @@
 #include <limits>
 //=========================================================================================
 namespace uo {
+    
+    
     struct idx_entry{
         std::uint32_t offset ;
         std::uint32_t length ;
