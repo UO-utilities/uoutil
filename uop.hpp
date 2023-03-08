@@ -226,7 +226,7 @@ namespace uo {
         
         
         //=========================================================================================
-        /// Read the uop data indicated by the table_entry.
+        /// Read the uop data indicated by the table entry.
         /// If the data is compressed, it will be de compressed
         /// Parameters:
         ///     - entry: the table entry one wants the data needed
@@ -234,7 +234,7 @@ namespace uo {
         /// - Returns: a vector containing the deceompressed data
         auto readData(const table_entry &entry, std::istream &input) ->std::vector<std::uint8_t>;
         //=========================================================================================
-        /// Read the uop data indicated by the table_entry.
+        /// Read the uop data indicated by the table entry.
         /// If the data is compressed, it will be de compressed
         /// Parameters:
         ///     - entry: the table entry one wants the data needed
