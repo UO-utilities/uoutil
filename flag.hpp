@@ -91,24 +91,74 @@ namespace uo {
         constexpr static auto   bit63=0x4000000000000000ull;
         constexpr static auto   bit64=0x8000000000000000ull;
         
+        /// The names of the flag masks. Allows one to get a string for a flag mask
         static const std::unordered_map<std::string,std::uint64_t> flagname_masks ;
+        /// obtains the mask for a flag name
+        /// Parameters:
+        /// - flag name: the name of the flag
+        /// - Returns: the flag mask
         static auto maskForName(const std::string &flag_name) ->std::uint64_t ;
+        /// obtains flag for a specifig flag bit (1-64). NOT 0 based!
+        /// Parameters:
+        /// - bit: the flag bit (1-64) NOT 0 based!
+        /// - Returns: the flag name
         static auto flagNameForBit(int bit) ->const std::string& ;
+        /// generates a header of all the flag names, useful for a title row in a csv file
+        /// Parameters:
+        /// - output: the stream to the text file
+        /// - sep: The separator to use between the flag names
+       /// - Returns: nothing
         static auto header(std::ostream &output , const std::string &sep=",")  ->void ;
 
+        /// The actual value of all flags
         std::uint64_t value ;
         
+        /// Constructor for the flag object
+        /// Parameters:
+        /// - flag value: The inital value for all flags
         flag_t(std::uint64_t flag_value=0) ;
+        /// Constructor for the flag object
+        /// Parameters:
+        /// - value: a text string of all flag values (1 or blank/0)
+        /// - sep: the separtor used between the values ;
         flag_t(const std::string &value,const std::string &sep=":") ;
+        /// Constructor for the flag object
+        /// Parameters:
+        /// - values: vector of string values (0/1 or empty) for each flag
         flag_t(const std::vector<std::string> &values);
         
+        /// Determines if any of the flag bits are set in the mask
+        /// Parameters:
+        /// - mask: the mask to compare to
+        /// - Returns: true if any flag bit is set
         auto hasFlag(std::uint64_t mask) const -> bool ;
+        /// Sets flag bits are set in the mask
+        /// Parameters:
+        /// - mask: the mask to "or" with
+        /// - Returns: a reference to the flag object
         [[maybe_unused]] auto setFlag(std::uint64_t mask) ->flag_t& ;
+        /// Generates a string of flags that are set
+        /// Parameters:
+        /// - sep: separator to use between names, defaults to ":"
+        /// - Returns: a string with the flag names that are set
         auto description(const std::string &sep=":") const ->std::string ;
-        auto column(std::ostream &output , const std::string &sep=",") const ->void ;
+        
+        /// Generates on one line, a 1/empty value for each flag
+        /// Individual entries are separated by the specified sep.
+        /// Useful when wanting to generating csv files
+        /// Parameters:
+        /// - output: output stream to the text file
+        /// - sep: separator to use between names, defaults to ":"
+        /// - Returns: a string with the flag names that are set
+       auto column(std::ostream &output , const std::string &sep=",") const ->void ;
+        
+        /// Allows one to set the flag object with a unsigned 64 bit value
         [[maybe_unused]] auto operator=(std::uint64_t value) ->flag_t& ;
+        /// Allows one to set the flag object with a signed 64 bit value
         [[maybe_unused]] auto operator=(std::int64_t value) ->flag_t& ;
+        /// Allows one to set the flag object with a unsigned 32 bit value
         [[maybe_unused]] auto operator=(std::uint32_t value) ->flag_t& ;
+        /// Allows one to set the flag object with a signed 32 bit value
         [[maybe_unused]] auto operator=(std::int32_t value) ->flag_t& ;
     };
 }
