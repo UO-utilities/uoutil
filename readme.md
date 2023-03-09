@@ -32,7 +32,7 @@ zlib library, and is expected that the system has the z library installed for sy
 include the zlib library, then build with the define WITH_ZLIB set to on (-DWITH_ZLIB=ON).  
 
 To build (Windows users ensure one is in a command prompt with the msvc++ variables are set, a developer prompt).    
-In the top level directorhy, where one cloned ***UOUTIL***:
+In the top level directory, where one cloned ***UOUTIL*** into:
 - `mkdir build`
 - `cd build`
 - `cmake .. -DCMAKE_BUILD_TYPE=Release`  (Linux/FreeBSD)
