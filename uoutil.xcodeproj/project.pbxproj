@@ -46,7 +46,7 @@
 		56706DEA29B7A14200B72E40 /* art.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = art.cpp; sourceTree = "<group>"; };
 		56706DEB29B7A14200B72E40 /* art.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = art.hpp; sourceTree = "<group>"; };
 		56706DEE29B8B5B600B72E40 /* DemystifyingUOP.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = DemystifyingUOP.html; sourceTree = "<group>"; };
-		56706DEF29B95AA400B72E40 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		56706DEF29B95AA400B72E40 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		56706DF029B979E800B72E40 /* gump.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gump.cpp; sourceTree = "<group>"; };
 		56706DF129B979E800B72E40 /* gump.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gump.hpp; sourceTree = "<group>"; };
 		56706DF429B9877000B72E40 /* texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 		568AFFD129B247D800A8A0C8 = {
 			isa = PBXGroup;
 			children = (
-				56706DEF29B95AA400B72E40 /* readme.md */,
+				56706DEF29B95AA400B72E40 /* Readme.md */,
 				56706DEE29B8B5B600B72E40 /* DemystifyingUOP.html */,
 				564EE4B329B64E0F00D7480F /* CMakeLists.txt */,
 				568AFFE329B24B7500A8A0C8 /* general.cpp */,
