@@ -39,6 +39,12 @@ add_library(uoutil STATIC
     ${PROJECT_SOURCE_DIR}/image.hpp
     ${PROJECT_SOURCE_DIR}/art.cpp
     ${PROJECT_SOURCE_DIR}/art.hpp
+    ${PROJECT_SOURCE_DIR}/gump.cpp
+    ${PROJECT_SOURCE_DIR}/gump.hpp
+    ${PROJECT_SOURCE_DIR}/texture.cpp
+    ${PROJECT_SOURCE_DIR}/texture.hpp
+    ${PROJECT_SOURCE_DIR}/light.cpp
+    ${PROJECT_SOURCE_DIR}/light.hpp
 
     ${PROJECT_SOURCE_DIR}/zlib/adler32.c
     ${PROJECT_SOURCE_DIR}/zlib/compress.c
@@ -86,6 +92,12 @@ add_library(uoutil STATIC
     ${PROJECT_SOURCE_DIR}/image.hpp
     ${PROJECT_SOURCE_DIR}/art.cpp
     ${PROJECT_SOURCE_DIR}/art.hpp
+    ${PROJECT_SOURCE_DIR}/gump.cpp
+    ${PROJECT_SOURCE_DIR}/gump.hpp
+    ${PROJECT_SOURCE_DIR}/texture.cpp
+    ${PROJECT_SOURCE_DIR}/texture.hpp
+    ${PROJECT_SOURCE_DIR}/light.cpp
+    ${PROJECT_SOURCE_DIR}/light.hpp
 )
  
  
