@@ -67,6 +67,14 @@ namespace uo{
         return static_cast<int>((value>>10)&0x1f);
     }
     //=========================================================================================
+    auto color_t::green() const ->int {
+        return static_cast<int>((value>>5)&0x1f);
+    }
+    //=========================================================================================
+    auto color_t::blue() const ->int {
+        return static_cast<int>((value)&0x1f);
+    }
+    //=========================================================================================
     auto color_t::hue(bool partial,const std::vector<color_t> &colors) const ->color_t {
         auto rvalue = color_t(value) ;
         if (((partial && grey()) || (!partial)) && !transparent()){

@@ -47,6 +47,12 @@ namespace uo{
         /// Provides the red channel value (0-31)
         /// - Returns: red channel value (0-31)
         auto red() const ->int ;
+        /// Provides the green channel value (0-31)
+        /// - Returns: green channel value (0-31)
+        auto green() const ->int ;
+        /// Provides the blue channel value (0-31)
+        /// - Returns: blue channel value (0-31)
+        auto blue() const ->int ;
         /// Provides a hue colored value from the original
         /// Takes the red channel value as a lookup into the vector colors
         /// If partial, only if the color is grey, will it perfrom the lookup

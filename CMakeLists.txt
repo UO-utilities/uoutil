@@ -47,6 +47,8 @@ add_library(uoutil STATIC
     ${PROJECT_SOURCE_DIR}/light.hpp
     ${PROJECT_SOURCE_DIR}/hue.cpp
     ${PROJECT_SOURCE_DIR}/hue.hpp
+    ${PROJECT_SOURCE_DIR}/uomap.cpp
+    ${PROJECT_SOURCE_DIR}/uomap.hpp
 
     ${PROJECT_SOURCE_DIR}/zlib/adler32.c
     ${PROJECT_SOURCE_DIR}/zlib/compress.c
@@ -102,6 +104,8 @@ add_library(uoutil STATIC
     ${PROJECT_SOURCE_DIR}/light.hpp
     ${PROJECT_SOURCE_DIR}/hue.cpp
     ${PROJECT_SOURCE_DIR}/hue.hpp
+    ${PROJECT_SOURCE_DIR}/uomap.cpp
+    ${PROJECT_SOURCE_DIR}/uomap.hpp
 )
  
  
