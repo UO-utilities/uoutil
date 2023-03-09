@@ -24,7 +24,7 @@ namespace uo {
     constexpr auto version = 0 ;
     /// Defines the different data types for uo
     enum class uotype_t {
-        anim,art,font,gump,hue,light,map,multi,skill,sound,mapsta,texture,tileinfo,housing
+        none,anim,art,font,gump,hue,light,map,multi,skill,sound,mapsta,texture,tileinfo,housing
     };
     /// The three different formats: uop, idx and mul, or just mul
     enum class uoformat_t { uop,mul,idxmul,bin};
