@@ -19,6 +19,9 @@
 #endif
 
 namespace uo {
+    
+    /// Define the version number of the library
+    constexpr auto version = 0 ;
     /// Defines the different data types for uo
     enum class uotype_t {
         anim,art,font,gump,hue,light,map,multi,skill,sound,mapsta,texture,tileinfo,housing
