@@ -7,6 +7,7 @@
 #include <fstream>
 
 #include "multi.hpp"
+#include "hash.hpp"
 
 using namespace std::string_literals ;
 
@@ -427,6 +428,19 @@ namespace uo {
         for (const auto &entry:items){
             output <<entry.description(use_hex)<<"\n";
         }
+    }
+
+    //==================================================================================
+    // Routines
+    //==================================================================================
+
+    //=========================================================
+    auto hashForMulti(std::uint32_t id) ->std::uint64_t {
+        return uop::hashLittle2(format(uo_hashes.at(uotype_t::multi),id)) ;
+    }
+    //=========================================================
+    auto hashForHousing() ->std::uint64_t {
+        return uop::hashLittle2(uo_hashes.at(uotype_t::housing)) ;
     }
 
 }

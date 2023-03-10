@@ -58,7 +58,14 @@ namespace uo {
         auto description(std::ostream &output,bool use_hex) ->void;
 
     };
-    
+
+    //==================================================================================
+    // Routines
+    //==================================================================================
+
+    auto hashForMulti(std::uint32_t id) ->std::uint64_t ;
+    auto hashForHousing() ->std::uint64_t ;
+
     
 }
 #endif /* multi_hpp */
