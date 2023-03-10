@@ -8,6 +8,8 @@
 #include <filesystem>
 #include <utility>
 #include <unordered_map>
+#include <vector>
+#include <cstdio>
 
 //=========================================================================================
 #if !defined(_UODIR)
@@ -57,6 +59,14 @@ namespace uo {
     /// The maximum tileid is 0x3fff, so a total of 0x4000 tiles (counting 0)
     constexpr auto terrain_tile_max = tileid_t(0x4000) ;
 
+    /// The id type for hues
+    using hueid_t = std::uint16_t ;
+    
+    
+    //==================================================================================
+    // The following are lifted from our utility library, strutil namespace
+    //==================================================================================
+
     //==========================================================
     // The source for this was found on StackOverflow at:
     // https://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
@@ -89,6 +99,73 @@ namespace uo {
                 }
             }
          }
+        return rvalue;
+    }
+
+    //=========================================================
+    // Trim all whitespace from the left of the string
+    inline auto ltrim(const std::string &value) -> std::string {
+        if (!value.empty()) {
+            auto loc = value.find_first_not_of(" \t\v\f\n\r");
+            if (loc == std::string::npos) {
+                return std::string();
+            }
+            return value.substr(loc);
+        }
+        return value;
+    }
+    //=========================================================
+    // Trim all whitespace from the right of the string
+    inline auto rtrim(const std::string &value) -> std::string {
+        if (!value.empty()) {
+            auto loc = value.find_last_not_of(" \t\v\f\n\r");
+            if (loc == std::string::npos) {
+                return value;
+            }
+            return value.substr(0, loc + 1);
+        }
+        return value;
+    }
+    //=========================================================
+    // Trim all whitespace from both sides of the string
+    inline auto trim(const std::string &value) -> std::string {
+        return rtrim(ltrim(value));
+    }
+    //=========================================================
+    inline auto parse(const std::string &value, const std::string &sep) -> std::vector<std::string> {
+        std::vector<std::string> rvalue;
+        auto current = std::string::size_type(0);
+        if (!sep.empty()){
+            auto loc = value.find(sep, current);
+            while (loc != std::string::npos) {
+                rvalue.push_back(trim(value.substr(current, loc - current)));
+                current = loc + sep.size();
+                if (current >= value.size()){
+                    rvalue.push_back("");
+                }
+                loc = value.find(sep, current);
+            }
+            if (current < value.size()) {
+                rvalue.push_back(trim(value.substr(current)));
+            }
+        }
+        else {
+            rvalue.push_back(trim(value));
+        }
+        return rvalue;
+    }
+    //=========================================================
+    inline auto strip(const std::string &value, const std::string &sep = "//", bool pack = true) -> std::string {
+        auto rvalue = value;
+        if (!sep.empty()){
+            auto loc = rvalue.find(sep);
+            if (loc != std::string::npos) {
+                rvalue = rvalue.substr(0, loc);
+            }
+            if (pack) {
+                rvalue = rtrim(rvalue);
+            }
+        }
         return rvalue;
     }
 

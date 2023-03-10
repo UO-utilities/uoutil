@@ -8,6 +8,7 @@
 #include <vector>
 #include <istream>
 
+#include "general.hpp"
 /*
  3.7 HUES.MUL
  Just read in HueGroups until you hit the end of the file. Note that large chunks of this file consist of garbage--OSI admits to this (something about a bug in their old code).
@@ -32,9 +33,6 @@ namespace uo {
     class color_t ;
     /// Maximum number of hues the client supports
     constexpr auto max_hue_entry = 3000 ;
-    
-    /// The id type for hues
-    using hueid_t = std::uint16_t ;
     
     /// Calculate the offset for a given hueid
     /// Parameters:
