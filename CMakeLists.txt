@@ -15,12 +15,25 @@
 cmake_minimum_required(VERSION 3.24)
 project(uoutil VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
+set(default_build_type "Release")
+
+
+
 
 if (WIN32)
 option(WITH_ZLIB "Build internal zlib" ON)
 else ()
 option(WITH_ZLIB "Build internal zlib" OFF)
 endif (WIN32)
+
+
+
+if(NOT CMAKE_BUILD_TYPE)
+    message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
+    set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE STRING "Choose the type of build." FORCE)
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
+    "Debug" "Release" )
+endif()
 
 
 # *************************************************************************
